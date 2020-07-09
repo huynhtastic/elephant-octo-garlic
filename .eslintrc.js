@@ -8,8 +8,8 @@ module.exports = {
   },
   parser: '@typescript-eslint/parser', // Specifies the ESLint parser
   extends: [
-    'airbnb',
-    'prettier',
+    'airbnb-typescript',
+    'prettier/react',
     'plugin:prettier/recommended', // Enables eslint-plugin-prettier and displays prettier errors as ESLint errors. Make sure this is always the last configuration in the extends array.
   ],
   globals: {
@@ -23,7 +23,10 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint', 'react', 'import'],
+  plugins: ['@typescript-eslint', 'react'],
+  parserOptions: {
+    project: './tsconfig.json',
+  },
   rules: {
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": "error",
