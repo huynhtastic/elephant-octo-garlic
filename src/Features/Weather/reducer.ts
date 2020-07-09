@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from 'redux-starter-kit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type WeatherForLocation = {
   description: string;
@@ -34,5 +34,5 @@ const slice = createSlice({
   },
 });
 
-export const reducer = slice.reducer;
-export const actions = slice.actions;
+export const { reducer } = slice;
+export const { actions } = slice;
