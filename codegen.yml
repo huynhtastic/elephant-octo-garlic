@@ -1,0 +1,6 @@
+schema: https://react.eogresources.com/graphql
+generates:
+  src/utils/schema.ts:
+    plugins:
+      - "typescript"
+      - "typescript-resolvers"
