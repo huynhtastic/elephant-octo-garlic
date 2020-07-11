@@ -1,6 +1,7 @@
 import { takeEvery, call } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 import { PayloadAction } from '@reduxjs/toolkit';
+
 import { actions as WeatherActions, ApiErrorAction } from './reducer';
 
 function* apiErrorReceived(action: PayloadAction<ApiErrorAction>) {

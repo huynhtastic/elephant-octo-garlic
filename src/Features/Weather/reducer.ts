@@ -24,13 +24,8 @@ const slice = createSlice({
   initialState,
   reducers: {
     weatherDataRecevied: (state, action: PayloadAction<WeatherForLocation>) => {
-      // TODO: Remove when proven working
       const { temperatureinCelsius } = action.payload;
       Object.assign(state, { ...action.payload, temperatureinFahrenheit: toF(temperatureinCelsius) });
-      // state.temperatureinCelsius = temperatureinCelsius;
-      // state.temperatureinFahrenheit = toF(temperatureinCelsius);
-      // state.description = description;
-      // state.locationName = locationName;
     },
     // FIXME: Reintroduce error if needed
     // weatherApiErrorReceived: (state, _: PayloadAction<ApiErrorAction>) => state,
@@ -38,5 +33,4 @@ const slice = createSlice({
   },
 });
 
-export const { reducer } = slice;
-export const { actions } = slice;
+export const { actions, reducer } = slice;
