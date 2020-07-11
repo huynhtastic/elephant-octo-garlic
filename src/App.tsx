@@ -8,9 +8,7 @@ import { createClient, Provider as UrqlProvider } from 'urql';
 
 import createStore from './store';
 import Header from './components/Header';
-// import NowWhat from './components/NowWhat';
-// import Wrapper from './components/Wrapper';
-import Dashboard from './pages/dashboard/dashboard';
+import Dashboard from './pages/dashboard/Dashboard';
 
 const client = createClient({
   url: 'https://react.eogresources.com/graphql',
@@ -37,7 +35,6 @@ const App = () => (
     <Provider store={store}>
       <UrqlProvider value={client}>
         <Header />
-        {/* <NowWhat /> */}
         <Dashboard />
         <ToastContainer />
       </UrqlProvider>

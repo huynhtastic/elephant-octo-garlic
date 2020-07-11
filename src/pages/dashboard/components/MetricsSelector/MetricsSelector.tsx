@@ -1,11 +1,11 @@
-import { Container, LinearProgress, FormControlLabel, Checkbox } from '@material-ui/core';
+import { LinearProgress, FormControlLabel, Checkbox } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { useQuery } from 'urql';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 
 import { actions, VisibleMetrics } from './utils';
-import { IState } from '../../store';
+import { IState } from '../../../../store';
 
 const query = `
   {
@@ -37,7 +37,7 @@ const renderMetricSelectors = (visibleMetrics: VisibleMetrics, dispatch: Dispatc
   );
 };
 
-const Dashboard: React.FC = () => {
+const MetricsSelector: React.FC = () => {
   const dispatch = useDispatch();
   const visibleMetrics = useSelector(getVisibleMetrics);
 
@@ -54,7 +54,7 @@ const Dashboard: React.FC = () => {
 
   if (fetching) return <LinearProgress />;
 
-  return <Container>{renderMetricSelectors(visibleMetrics, dispatch)}</Container>;
+  return <>{renderMetricSelectors(visibleMetrics, dispatch)}</>;
 };
 
-export default Dashboard;
+export default MetricsSelector;
