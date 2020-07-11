@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from 'redux-starter-kit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type WeatherForLocation = {
   description: string;
@@ -24,15 +24,19 @@ const slice = createSlice({
   initialState,
   reducers: {
     weatherDataRecevied: (state, action: PayloadAction<WeatherForLocation>) => {
-      const { description, locationName, temperatureinCelsius } = action.payload;
-      state.temperatureinCelsius = temperatureinCelsius;
-      state.temperatureinFahrenheit = toF(temperatureinCelsius);
-      state.description = description;
-      state.locationName = locationName;
+      // TODO: Remove when proven working
+      const { temperatureinCelsius } = action.payload;
+      Object.assign(state, { ...action.payload, temperatureinFahrenheit: toF(temperatureinCelsius) });
+      // state.temperatureinCelsius = temperatureinCelsius;
+      // state.temperatureinFahrenheit = toF(temperatureinCelsius);
+      // state.description = description;
+      // state.locationName = locationName;
     },
-    weatherApiErrorReceived: (state, action: PayloadAction<ApiErrorAction>) => state,
+    // FIXME: Reintroduce error if needed
+    // weatherApiErrorReceived: (state, _: PayloadAction<ApiErrorAction>) => state,
+    weatherApiErrorReceived: (state) => state,
   },
 });
 
-export const reducer = slice.reducer;
-export const actions = slice.actions;
+export const { reducer } = slice;
+export const { actions } = slice;
