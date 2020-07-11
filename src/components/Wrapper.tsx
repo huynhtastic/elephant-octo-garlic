@@ -1,3 +1,4 @@
+// TODO: Delete if necessary
 import { makeStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React from 'react';
