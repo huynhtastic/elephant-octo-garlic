@@ -4,8 +4,8 @@ import { useQuery } from 'urql';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 
-import { IState } from '../../store';
 import { actions, VisibleMetrics } from './utils';
+import { IState } from '../../store';
 
 const query = `
   {
@@ -48,8 +48,9 @@ const Dashboard: React.FC = () => {
   const { fetching, data, error } = result;
 
   useEffect((): void => {
+    if (error) dispatch(actions.handleErr(error));
     if (data) dispatch(actions.initMetrics(data.getMetrics));
-  }, [data, dispatch]);
+  }, [data, dispatch, error]);
 
   if (fetching) return <LinearProgress />;
 
