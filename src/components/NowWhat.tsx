@@ -1,14 +1,8 @@
-import Card from '@material-ui/core/Card';
-import Typography from '@material-ui/core/Typography';
-import CardContent from '@material-ui/core/CardContent';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import { makeStyles } from '@material-ui/core/styles';
+import { Card, CardContent, List, ListItem, ListItemText, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
 
-import CardHeader from './CardHeader';
 import Avatar from './Avatar';
+import CardHeader from './CardHeader';
 
 const useStyles = makeStyles({
   card: {
@@ -46,9 +40,8 @@ export default () => {
         </List>
 
         <Typography variant="body1">
-          Remember to refer to our
-          <a href="https://react.eogresources.com/assessing">How We Assess Submissions</a> guidelines, as well as the{' '}
-          <a href="https://react.eogresources.com/api">GraphQL API Documentation</a>.
+          Remember to refer to our <a href="https://react.eogresources.com/assessing">How We Assess Submissions</a>{' '}
+          guidelines, as well as the <a href="https://react.eogresources.com/api">GraphQL API Documentation</a>.
         </Typography>
       </CardContent>
     </Card>

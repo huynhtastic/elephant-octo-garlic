@@ -1,9 +1,10 @@
+import { LinearProgress } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { actions } from './reducer';
-import { Provider, createClient, useQuery } from 'urql';
 import { useGeolocation } from 'react-use';
-import LinearProgress from '@material-ui/core/LinearProgress';
+import { Provider, createClient, useQuery } from 'urql';
+
+import { actions } from './reducer';
 import Chip from '../../components/Chip';
 import { IState } from '../../store';
 
@@ -57,7 +58,9 @@ const Weather = () => {
   const { fetching, data, error } = result;
   useEffect(() => {
     if (error) {
-      dispatch(actions.weatherApiErrorReceived({ error: error.message }));
+      // FIXME: Reintroduce error if needed
+      // dispatch(actions.weatherApiErrorReceived({ error: error.message }));
+      dispatch(actions.weatherApiErrorReceived());
       return;
     }
     if (!data) return;
