@@ -22,6 +22,7 @@
     "redux": "^4.0.4",
     "redux-devtools-extension": "^2.13.5",
     "redux-saga": "^1.1.1",
+    "subscriptions-transport-ws": "^0.9.17",
     "typescript": "^3.7.2",
     "urql": "^1.6.3"
   },
