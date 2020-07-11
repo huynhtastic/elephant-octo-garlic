@@ -14,6 +14,10 @@ const slice = createSlice({
         return acc;
       }, state);
     },
+    toggleMetric: (state, action: PayloadAction<string>): void => {
+      const key = action.payload as keyof VisibleMetrics;
+      Object.assign(state, { ...state, [key]: !state[key] });
+    },
     // TODO: Handle error
     // weatherApiErrorReceived: (state) => state,
   },
