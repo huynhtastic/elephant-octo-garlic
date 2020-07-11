@@ -32,7 +32,8 @@
     "eject": "react-scripts eject",
     "generate": "graphql-codegen --config codegen.yml",
     "lint": "eslint src/**/*.{ts,tsx}",
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "start:nb": "BROWSER=none yarn start"
   },
   "eslintConfig": {
     "extends": "react-app"
