@@ -1,4 +1,4 @@
-import { Paper } from '@material-ui/core';
+import { Card, Grid, CardContent, Typography, makeStyles } from '@material-ui/core';
 import React from 'react';
 import { useSelector } from 'react-redux';
 
@@ -16,7 +16,16 @@ const getVisibleMeasures = (state: IState): VisibleMeasures => ({
   currentMeasures: state.currentMeasure,
 });
 
-const renderLatestMetric = (metrics: VisibleMeasures): (React.ReactElement | undefined)[] => {
+const useStyles = makeStyles({
+  metricTitle: {
+    marginBottom: 12,
+  },
+});
+
+const renderLatestMetric = (
+  metrics: VisibleMeasures,
+  styles: ReturnType<typeof useStyles>,
+): (React.ReactElement | undefined)[] => {
   const { visibleMetrics, currentMeasures } = metrics;
   return Object.entries(visibleMetrics).map(([metricName, isVisible]): React.ReactElement | undefined => {
     if (isVisible) {
@@ -27,9 +36,16 @@ const renderLatestMetric = (metrics: VisibleMeasures): (React.ReactElement | und
       }
 
       return (
-        <Paper key={metricName}>
-          {metricName} {measureString}
-        </Paper>
+        <Grid item lg={5}>
+          <Card key={metricName}>
+            <CardContent>
+              <Typography className={styles.metricTitle} variant="h5" component="h2">
+                {metricName}
+              </Typography>
+              <Typography color="textSecondary">{measureString}</Typography>
+            </CardContent>
+          </Card>
+        </Grid>
       );
     }
 
@@ -39,7 +55,13 @@ const renderLatestMetric = (metrics: VisibleMeasures): (React.ReactElement | und
 
 const LatestMetric: React.FC = (): React.ReactElement => {
   const metrics = useSelector(getVisibleMeasures);
-  return <>{renderLatestMetric(metrics)}</>;
+  const styles = useStyles();
+
+  return (
+    <Grid container spacing={2}>
+      {renderLatestMetric(metrics, styles)}
+    </Grid>
+  );
 };
 
 export default LatestMetric;

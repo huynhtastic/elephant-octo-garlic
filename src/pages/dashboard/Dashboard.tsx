@@ -1,4 +1,4 @@
-import { Container } from '@material-ui/core';
+import { Grid, makeStyles } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSubscription } from 'urql';
@@ -18,7 +18,14 @@ const query = `
   }
 `;
 
+const useStyles = makeStyles({
+  container: {
+    padding: 16,
+  },
+});
+
 const Dashboard: React.FC = (): React.ReactElement => {
+  const styles = useStyles();
   const [{ data, error }] = useSubscription({
     query,
   });
@@ -31,10 +38,14 @@ const Dashboard: React.FC = (): React.ReactElement => {
   }, [error, data, dispatch]);
 
   return (
-    <Container>
-      <MetricsSelector />
-      <LatestMetric />
-    </Container>
+    <Grid className={styles.container} container spacing={2}>
+      <Grid item lg={9}>
+        <LatestMetric />
+      </Grid>
+      <Grid container item direction="column" lg={3}>
+        <MetricsSelector />
+      </Grid>
+    </Grid>
   );
 };
 
