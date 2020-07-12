@@ -1,11 +1,12 @@
-import { takeEvery, call } from 'redux-saga/effects';
-import { toast } from 'react-toastify';
 import { PayloadAction } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
+import { takeEvery, call } from 'redux-saga/effects';
+import { CombinedError } from 'urql';
 
-import { actions as WeatherActions, ApiErrorAction } from './reducer';
+import { actions as WeatherActions } from './reducer';
 
-function* apiErrorReceived(action: PayloadAction<ApiErrorAction>) {
-  yield call(toast.error, `Error Received: ${action.payload.error}`);
+function* apiErrorReceived({ payload: { name, message } }: PayloadAction<CombinedError>) {
+  yield call(toast.error, `Error trying to get weather: ${name}: ${message}`);
 }
 
 export default function* watchApiError() {

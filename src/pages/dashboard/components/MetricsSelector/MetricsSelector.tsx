@@ -1,10 +1,10 @@
 import { LinearProgress, FormControlLabel, Checkbox } from '@material-ui/core';
 import React, { useEffect } from 'react';
-import { useQuery } from 'urql';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
+import { useQuery } from 'urql';
 
-import { actions, VisibleMetrics } from './utils';
+import { actions, VisibleMetrics } from './features/visible-metrics';
 import { IState } from '../../../../store';
 
 const query = `

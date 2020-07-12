@@ -21,7 +21,7 @@ const slice = createSlice({
     },
     handleErr: (state, action: PayloadAction<CombinedError>) => {
       const { name, message } = action.payload;
-      toast.error(`${name}: ${message}`);
+      toast.error(`Error getting available metrics:\n${name}: ${message}`);
       return state;
     },
   },
