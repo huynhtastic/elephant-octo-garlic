@@ -46,9 +46,7 @@ const Weather = () => {
   const { fetching, data, error } = result;
   useEffect(() => {
     if (error) {
-      // FIXME: Reintroduce error if needed
-      // dispatch(actions.weatherApiErrorReceived({ error: error.message }));
-      dispatch(actions.weatherApiErrorReceived());
+      dispatch(actions.weatherApiErrorReceived(error));
       return;
     }
     if (!data) return;

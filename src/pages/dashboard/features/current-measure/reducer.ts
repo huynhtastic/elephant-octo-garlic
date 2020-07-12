@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { toast } from 'react-toastify';
 import { CombinedError } from 'urql';
 
 export interface Measurement {
@@ -23,11 +22,8 @@ const slice = createSlice({
         [metric]: measure,
       };
     },
-    handleErr: (state, action: PayloadAction<CombinedError>) => {
-      const { name, message } = action.payload;
-      toast.error(`Error getting current measurements:\n${name}: ${message}`);
-      return state;
-    },
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    handleErr: (state, _: PayloadAction<CombinedError>) => state,
   },
 });
 

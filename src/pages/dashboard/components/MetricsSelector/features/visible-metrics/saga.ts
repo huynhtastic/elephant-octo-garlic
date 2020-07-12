@@ -5,11 +5,10 @@ import { CombinedError } from 'urql';
 
 import { actions } from './reducer';
 
-function* apiErrorReceived(action: PayloadAction<CombinedError>) {
-  const { name, message } = action.payload;
-  yield call(toast.error, `Error getting current measurements:\n${name}: ${message}`);
+function* handleErr({ payload: { name, message } }: PayloadAction<CombinedError>) {
+  yield call(toast.error, `Error fetching available metrics: ${name}: ${message}`);
 }
 
 export default function* saga() {
-  yield takeEvery(actions.handleErr.type, apiErrorReceived);
+  yield takeEvery(actions.handleErr.type, handleErr);
 }

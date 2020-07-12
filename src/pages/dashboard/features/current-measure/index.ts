@@ -1,2 +1,2 @@
 export * from './reducer';
-export { saga } from './saga';
+export { default as saga } from './saga';

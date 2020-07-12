@@ -2,7 +2,7 @@ import { Paper } from '@material-ui/core';
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { VisibleMetrics } from '../MetricsSelector/utils';
+import { VisibleMetrics } from '../MetricsSelector/features/visible-metrics';
 import { CurrentMeasure } from '../../features/current-measure';
 import { IState } from '../../../../store';
 

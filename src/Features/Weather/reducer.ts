@@ -1,13 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { CombinedError } from 'urql';
 
 export type WeatherForLocation = {
   description: string;
   locationName: string;
   temperatureinCelsius: number;
-};
-
-export type ApiErrorAction = {
-  error: string;
 };
 
 const initialState = {
@@ -27,9 +24,9 @@ const slice = createSlice({
       const { temperatureinCelsius } = action.payload;
       Object.assign(state, { ...action.payload, temperatureinFahrenheit: toF(temperatureinCelsius) });
     },
-    // FIXME: Reintroduce error if needed
-    // weatherApiErrorReceived: (state, _: PayloadAction<ApiErrorAction>) => state,
-    weatherApiErrorReceived: (state) => state,
+    // no-unused vars flags this next line, but we use this definition for the saga
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    weatherApiErrorReceived: (state, _: PayloadAction<CombinedError>) => state,
   },
 });
 
