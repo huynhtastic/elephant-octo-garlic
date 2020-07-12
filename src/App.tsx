@@ -16,7 +16,7 @@ const url = '://react.eogresources.com/graphql';
 const subscriptionClient = new SubscriptionClient(`wss${url}`, { reconnect: true });
 
 const client = createClient({
-  url: `https:${url}`,
+  url: `https${url}`,
   exchanges: [
     ...defaultExchanges,
     subscriptionExchange({
