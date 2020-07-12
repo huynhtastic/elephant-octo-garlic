@@ -3,7 +3,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import { VisibleMetrics } from '../MetricsSelector/utils';
-import { CurrentMeasure } from '../../utils';
+import { CurrentMeasure } from '../../features/current-measure';
 import { IState } from '../../../../store';
 
 interface VisibleMeasures {

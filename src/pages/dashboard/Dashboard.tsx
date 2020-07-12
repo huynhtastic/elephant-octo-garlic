@@ -5,7 +5,7 @@ import { useSubscription } from 'urql';
 
 import LatestMetric from './components/LatestMetric';
 import MetricsSelector from './components/MetricsSelector/MetricsSelector';
-import { actions } from './utils';
+import { actions } from './features/current-measure';
 
 const query = `
   subscription {
