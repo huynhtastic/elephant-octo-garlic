@@ -37,7 +37,7 @@ const renderMetricSelectors = (visibleMetrics: VisibleMetrics, dispatch: Dispatc
   );
 };
 
-const MetricsSelector: React.FC = () => {
+const MetricsSelector: React.FC = React.memo(() => {
   const dispatch = useDispatch();
   const visibleMetrics = useSelector(getVisibleMetrics);
 
@@ -55,6 +55,6 @@ const MetricsSelector: React.FC = () => {
   if (fetching) return <LinearProgress />;
 
   return <>{renderMetricSelectors(visibleMetrics, dispatch)}</>;
-};
+});
 
 export default MetricsSelector;

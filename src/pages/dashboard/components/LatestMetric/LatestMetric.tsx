@@ -11,9 +11,9 @@ interface VisibleMeasures {
   currentMeasures: CurrentMeasure;
 }
 
-const getVisibleMeasures = (state: IState): VisibleMeasures => ({
-  visibleMetrics: state.visibleMetrics,
-  currentMeasures: state.currentMeasure,
+const getVisibleMeasures = ({ visibleMetrics, currentMeasures }: IState): VisibleMeasures => ({
+  visibleMetrics,
+  currentMeasures,
 });
 
 const useStyles = makeStyles({
@@ -36,8 +36,8 @@ const renderLatestMetric = (
       }
 
       return (
-        <Grid item lg={5}>
-          <Card key={metricName}>
+        <Grid key={metricName} item md={5}>
+          <Card>
             <CardContent>
               <Typography className={styles.metricTitle} variant="h5" component="h2">
                 {metricName}

@@ -19,6 +19,7 @@
     "react-toastify": "^6.0.8",
     "react-use": "^15.3.2",
     "rebound": "^0.1.0",
+    "recharts": "2.0.0-beta.6",
     "redux": "^4.0.4",
     "redux-devtools-extension": "^2.13.5",
     "redux-saga": "^1.1.1",
