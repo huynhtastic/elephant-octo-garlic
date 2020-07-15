@@ -1,9 +1,10 @@
 import { Card, Grid, CardContent, Typography, makeStyles } from '@material-ui/core';
+import { each, isEmpty } from 'lodash';
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { VisibleMetrics } from '../MetricsSelector/features/visible-metrics';
-import { CurrentMeasure } from '../../features/current-measure';
+import { CurrentMeasure } from '../../../../Features/CurrentMeasure';
+import { VisibleMetrics } from '../../../../Features/VisibleMetrics';
 import { IState } from '../../../../store';
 
 interface VisibleMeasures {
@@ -25,17 +26,19 @@ const useStyles = makeStyles({
 const renderLatestMetric = (
   metrics: VisibleMeasures,
   styles: ReturnType<typeof useStyles>,
-): (React.ReactElement | undefined)[] => {
+): React.ReactElement | React.ReactElement[] => {
   const { visibleMetrics, currentMeasures } = metrics;
-  return Object.entries(visibleMetrics).map(([metricName, isVisible]): React.ReactElement | undefined => {
+  const elements: React.ReactElement[] = [];
+  each(visibleMetrics, (isVisible, metricName): void => {
     if (isVisible) {
       let measureString = 'Loading...';
       const measure = currentMeasures[metricName as keyof typeof currentMeasures];
-      if (measure) {
+
+      if (measure !== undefined) {
         measureString = `${measure.value} ${measure.unit}`;
       }
 
-      return (
+      elements.push(
         <Grid key={metricName} item md={5}>
           <Card>
             <CardContent>
@@ -45,12 +48,24 @@ const renderLatestMetric = (
               <Typography color="textSecondary">{measureString}</Typography>
             </CardContent>
           </Card>
-        </Grid>
+        </Grid>,
       );
     }
-
-    return undefined;
   });
+
+  if (!isEmpty(elements)) return elements;
+
+  return (
+    <Grid item md={12}>
+      <Card>
+        <CardContent>
+          <Typography variant="h5" component="h2">
+            Choose a metric to view data about it.
+          </Typography>
+        </CardContent>
+      </Card>
+    </Grid>
+  );
 };
 
 const LatestMetric: React.FC = (): React.ReactElement => {

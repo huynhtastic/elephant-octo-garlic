@@ -1,10 +1,10 @@
-import { LinearProgress, FormControlLabel, Checkbox } from '@material-ui/core';
+import { LinearProgress, FormControlLabel, Checkbox, Typography } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import { useQuery } from 'urql';
 
-import { actions, VisibleMetrics } from './features/visible-metrics';
+import { actions, VisibleMetrics } from '../../../../Features/VisibleMetrics';
 import { IState } from '../../../../store';
 
 const query = `
@@ -54,7 +54,14 @@ const MetricsSelector: React.FC = React.memo(() => {
 
   if (fetching) return <LinearProgress />;
 
-  return <>{renderMetricSelectors(visibleMetrics, dispatch)}</>;
+  return (
+    <>
+      <Typography variant="h5" component="h2">
+        Metrics Available:
+      </Typography>
+      {renderMetricSelectors(visibleMetrics, dispatch)}
+    </>
+  );
 });
 
 export default MetricsSelector;

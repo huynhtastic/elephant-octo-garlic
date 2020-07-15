@@ -1,12 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CombinedError } from 'urql';
 
-export interface Measurement {
-  at: number;
-  value: number;
-  metric: string;
-  unit: string;
-}
+import { Measurement } from '../../utils/schema';
 
 export type CurrentMeasure = Record<string, Omit<Measurement, 'metric'>>;
 

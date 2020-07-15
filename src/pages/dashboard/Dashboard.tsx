@@ -6,9 +6,10 @@ import { useSubscription } from 'urql';
 import LatestMetric from './components/LatestMetric';
 import MetricChart from './components/MetricChart';
 import MetricsSelector from './components/MetricsSelector/MetricsSelector';
-import { actions as currentMeasureActions } from './features/current-measure';
-import { actions as chartDataActions } from './components/MetricChart/features/ChartData';
+import { actions as chartDataActions } from '../../Features/ChartData';
+import { actions as currentMeasureActions } from '../../Features/CurrentMeasure';
 import { IState } from '../../store';
+import { Subscription } from '../../utils/schema';
 
 const query = `
   subscription {
@@ -31,7 +32,7 @@ const getVisibleMeasures = (state: IState) => state.visibleMetrics;
 
 const Dashboard: React.FC = (): React.ReactElement => {
   const styles = useStyles();
-  const [{ data, error }] = useSubscription({
+  const [{ data, error }] = useSubscription<Subscription>({
     query,
   });
 
@@ -44,13 +45,15 @@ const Dashboard: React.FC = (): React.ReactElement => {
     if (error) dispatch(currentMeasureActions.handleErr(error));
     if (data) {
       const { newMeasurement } = data;
-      dispatch(currentMeasureActions.storeMeasure(newMeasurement));
-      if (visibleMetrics[newMeasurement.metric]) dispatch(chartDataActions.addMeasure(newMeasurement));
+      if (newMeasurement) {
+        dispatch(currentMeasureActions.storeMeasure(newMeasurement));
+        if (visibleMetrics[newMeasurement.metric]) dispatch(chartDataActions.addMeasure(newMeasurement));
+      }
     }
   }, [error, data, dispatch, visibleMetrics]);
 
   return (
-    <Grid className={styles.container} container spacing={2}>
+    <Grid className={styles.container} container spacing={4}>
       <Grid item md={9}>
         <LatestMetric />
       </Grid>

@@ -2,7 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import { CombinedError } from 'urql';
 
-import { Measurement } from '../../../../features/current-measure';
+import { HistoricalMeasure } from '../../pages/dashboard/components/MetricChart/gql/GetHistoricalMeasures';
+import { Measurement } from '../../utils/schema';
 
 export interface DataPoint {
   at: number;
@@ -10,21 +11,13 @@ export interface DataPoint {
   [key: string]: any;
 }
 
-interface InitMetricData {
-  metric: string;
-  measurements: {
-    at: number;
-    unit: string;
-    value: number;
-  }[];
-}
 const initialState: DataPoint[] = [];
 
 const slice = createSlice({
   name: 'metricData',
   initialState,
   reducers: {
-    initData: (_, { payload }: PayloadAction<InitMetricData[]>) => {
+    initData: (_, { payload }: PayloadAction<HistoricalMeasure[]>) => {
       const newState = [];
 
       for (let i = 0; i < payload[0].measurements.length; i += 1) {

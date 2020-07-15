@@ -1,8 +1,9 @@
 import { spawn } from 'redux-saga/effects';
+
+import { saga as chartDataSaga } from '../Features/ChartData';
+import { saga as currentMeasureSaga } from '../Features/CurrentMeasure';
+import { saga as visibleMetricsSaga } from '../Features/VisibleMetrics';
 import weatherSaga from '../Features/Weather/saga';
-import { saga as currentMeasureSaga } from '../pages/dashboard/features/current-measure';
-import { saga as visibleMetricsSaga } from '../pages/dashboard/components/MetricsSelector/features/visible-metrics';
-import { saga as chartDataSaga } from '../pages/dashboard/components/MetricChart/features/ChartData';
 
 export default function* root() {
   yield spawn(weatherSaga);

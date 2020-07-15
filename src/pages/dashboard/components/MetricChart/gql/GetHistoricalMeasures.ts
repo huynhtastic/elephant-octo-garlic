@@ -1,6 +1,11 @@
 import { UseQueryArgs } from 'urql';
 
-import { VisibleMetrics } from '../../MetricsSelector/features/visible-metrics';
+import { VisibleMetrics } from '../../../../../Features/VisibleMetrics';
+import { MeasurementQuery, Measurement } from '../../../../../utils/schema';
+
+interface Args {
+  measures: MeasurementQuery[];
+}
 
 const THIRTY_MINUTES = 1800000;
 
@@ -17,8 +22,17 @@ const query = `
   }
 `;
 
-const getVariables = (visibleMetrics: VisibleMetrics, after: number) => {
-  const variables: Record<string, any>[] = [];
+export interface HistoricalMeasure {
+  metric: string;
+  measurements: Omit<Measurement, 'metric'>[];
+}
+
+export interface GetHistoricalMeasuresData {
+  getMultipleMeasurements: HistoricalMeasure[];
+}
+
+const getVariables = (visibleMetrics: VisibleMetrics, after: number): MeasurementQuery[] => {
+  const variables: MeasurementQuery[] = [];
 
   return Object.entries(visibleMetrics).reduce((acc, [metricName, isVisible]) => {
     if (!isVisible) return acc;
@@ -26,8 +40,7 @@ const getVariables = (visibleMetrics: VisibleMetrics, after: number) => {
   }, variables);
 };
 
-// FIXME:
-export default (visibleMetrics: VisibleMetrics, after: number): UseQueryArgs<{}> => ({
+export default (visibleMetrics: VisibleMetrics, after: number): UseQueryArgs<Args> => ({
   query,
   variables: { measures: getVariables(visibleMetrics, after) },
 });
